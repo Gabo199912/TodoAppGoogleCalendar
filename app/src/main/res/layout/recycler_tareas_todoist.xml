@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginTop="8dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textViewTituloTodoist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:hint="TITULO"
+            android:paddingStart="30dp"/>
+
+        <Space
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"/>
+
+        <TextView
+            android:id="@+id/textViewUrgenciaTodoist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:hint="URGENCIA"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textViewDescripcionTodoist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="DESCRIPCION"
+        android:layout_marginBottom="10dp"
+        android:paddingStart="30dp"/>
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="80dp"
+        android:layout_gravity="end"
+        android:layout_marginEnd="80dp"
+        android:visibility="gone"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/botonEditarTodoist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EDITAR"
+            android:layout_marginStart="30dp"
+            app:backgroundTint="#5D7FF2">
+
+        </com.google.android.material.button.MaterialButton>
+
+        <Space
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/botonEliminarTodoist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ELIMINAR"
+            android:layout_marginEnd="30dp"
+            app:backgroundTint="#FF0000">
+
+        </com.google.android.material.button.MaterialButton>
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

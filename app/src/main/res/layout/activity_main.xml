@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:title="TodoApp"
+        android:titleTextColor="@color/white"
+        android:background="#00BCD4">
+
+
+        <ImageView
+            android:id="@+id/nuevaVista"
+            android:layout_width="55dp"
+            android:layout_height="35dp"
+            android:src="@drawable/ic_arrow_right"
+            android:layout_marginStart="220dp"
+            android:clickable="true"
+            android:onClick="abrirVentana"/>
+    </Toolbar>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/editTextTitulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="30dp"
+            android:padding="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:hint="Titulo"
+            android:background="@drawable/edittext_border"
+            />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+        <EditText
+            android:id="@+id/editTextDescripcion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="30dp"
+            android:padding="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:hint="Descripcion"
+            android:background="@drawable/edittext_border"
+            android:inputType="textMultiLine"
+            android:lines="3"
+            android:maxLines="5"
+            android:scrollbars="vertical"
+            android:scrollHorizontally="false"
+            />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+
+
+        <RadioGroup
+            android:id="@+id/tipoUrgencia"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <RadioButton
+                android:id="@+id/bajo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
+                android:text="BAJO"/>
+
+            <RadioButton
+                android:id="@+id/medio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
+                android:text="MEDIO"/>
+
+            <RadioButton
+                android:id="@+id/alto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ALTO"/>
+
+        </RadioGroup>
+
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="15dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/fecha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp"
+                android:text="FECHA"
+                android:textSize="18dp"
+                android:onClick="abrirCalendario"
+                app:backgroundTint="#5D7FF2"
+                >
+
+            </com.google.android.material.button.MaterialButton>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="5dp"/>
+
+            <TextView
+                android:id="@+id/textViewCalendario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp"
+                android:hint="FECHA"
+                android:gravity="center"
+                android:visibility="gone"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="5dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/hora"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp"
+                android:text="HORA"
+                android:textSize="18dp"
+                app:backgroundTint="#5D7FF2">
+            </com.google.android.material.button.MaterialButton>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="5dp"/>
+
+        <TextView
+            android:id="@+id/textViewHora"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
+            android:hint="HORA"
+            android:gravity="center"
+            android:visibility="gone"/>
+
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_width="320dp"
+            android:layout_height="220dp"
+            android:visibility="gone"/>
+
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/guardar"
+                android:layout_marginStart="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="GUARDAR"
+                app:backgroundTint="#34CD39">
+
+            </com.google.android.material.button.MaterialButton>
+
+            <Space
+                android:layout_width="20dp"
+                android:layout_height="match_parent"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tareaTodoist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TAREA TODOIST"
+                app:backgroundTint="#5D7FF2"
+                android:onClick="nuevaVentana">
+
+            </com.google.android.material.button.MaterialButton>
+
+
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/botonTareasCreadas"
+            android:layout_width="114dp"
+            android:layout_height="58dp"
+            android:layout_marginStart="20dp"
+            android:text="CREAR TODOIST"
+            app:backgroundTint="#FF5722">
+
+        </com.google.android.material.button.MaterialButton>
+
+
+
+
+
+    </LinearLayout>
+
+</LinearLayout>
