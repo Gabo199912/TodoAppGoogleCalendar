@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.example.todoappgooglecalendar" />
+                  <option name="mobileSdkAppId" value="1:751349774020:android:1716b696e52aa7b5157b91" />
+                  <option name="projectId" value="todoappcalendar" />
+                  <option name="projectNumber" value="751349774020" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

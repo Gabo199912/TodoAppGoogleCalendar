@@ -16,6 +16,7 @@ import com.example.todoappgooglecalendar.ModelosApiTodoist.ApiResponse;
 import com.example.todoappgooglecalendar.ModelosApiTodoist.Tareas;
 import com.example.todoappgooglecalendar.Singleton.TodoistPendientes;
 import com.example.todoappgooglecalendar.adaptadores.adaptadorTodoist;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.List;
 
@@ -28,6 +29,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class listaTodoist extends AppCompatActivity {
     public static final String API_TOKEN = ""; //<----------INSERTAR TOKEN AQUI
 
+
+    private FirebaseAnalytics mFirebaseAnalytics;
     Button actualizarLista;
 
     RecyclerView recyclerTodoist;
@@ -42,6 +45,8 @@ public class listaTodoist extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         actualizarLista = findViewById(R.id.actualizarLista);
         recyclerTodoist = findViewById(R.id.recyclerTodoist);
@@ -70,6 +75,14 @@ public class listaTodoist extends AppCompatActivity {
                     adaptadorTodoist adaptador = new adaptadorTodoist(tareas);
 
                     recyclerTodoist.setAdapter(adaptador);
+
+                    Bundle params = new Bundle();
+                    params.putString("api_name", "getUserData");
+                    params.putString("status", "success");
+
+
+                    mFirebaseAnalytics.logEvent("Listar_Api", params);
+
 
                     Log.d("CODIGO VERIFICACION", "Tareas: " + response.code());
                 }else{

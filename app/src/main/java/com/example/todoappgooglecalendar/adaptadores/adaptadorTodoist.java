@@ -79,7 +79,7 @@ public class adaptadorTodoist extends RecyclerView.Adapter<adaptadorTodoist.View
 
 
 
-        holder.botonEliminar.setOnClickListener(view -> {
+       /* holder.botonEliminar.setOnClickListener(view -> {
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl("https://api.todoist.com/api/v1/")
                     .addConverterFactory(GsonConverterFactory.create())
@@ -88,7 +88,7 @@ public class adaptadorTodoist extends RecyclerView.Adapter<adaptadorTodoist.View
             TodoistApi todoistApi = retrofit.create(TodoistApi.class);
             Call<ApiResponse> call = todoistApi.eliminarTarea()
 
-        });
+        });*/
 
     }
     @Override

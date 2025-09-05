@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +29,9 @@ import com.example.todoappgooglecalendar.Singleton.TareasPendientes;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
+import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
+
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -42,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String API_TOKEN = ""; //<----------INSERTAR TOKEN AQUI
 
+    private FirebaseAnalytics analytics;
+
 
     private EditText editTextTitulo;
     private EditText editTextDescripcion;
@@ -54,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
     private Button botonTareasCreadas;
 
     private Button tareaTodoist;
+
+    private Switch switchAnalytics;
 
     private Button fecha;
     private Button hora;
@@ -71,9 +79,21 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+
+        analytics = FirebaseAnalytics.getInstance(this);
+
+        Bundle params = new Bundle();
+        params.putString(FirebaseAnalytics.Param.METHOD, "inicio de app");
+        params.putString("todoist", "Angel Vasquez");
+        params.putString(FirebaseAnalytics.Event.TUTORIAL_BEGIN, "inicio de app");
+
+        analytics.logEvent("inicio_app", params);
+
+
         //TODOIST
         tareaTodoist = findViewById(R.id.tareaTodoist);
 
+        switchAnalytics = findViewById(R.id.switchAnalytics);
 
 
 
@@ -95,26 +115,74 @@ public class MainActivity extends AppCompatActivity {
         hora = findViewById(R.id.hora);
 
 
+        FirebaseCrashlytics crashlytics = FirebaseCrashlytics.getInstance();
+
+        crashlytics.setUserId("Usuario angel");
+        crashlytics.setCustomKey("pantalla", "MainActivity");
 
 
-        guardar.setOnClickListener(view -> agregarDatos());
         fecha.setOnClickListener(view -> abrirCalendario());
         hora.setOnClickListener(view -> abrirFecha());
         botonTareasCreadas.setOnClickListener(view -> consultarTareas());
 
 
-        //PARTE DEL TODOIST
+        guardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    agregarDatos();
+
+                }catch (Exception e){
+                    FirebaseCrashlytics.getInstance().recordException(e);
+                }
+            }
+        });
+
+
+        switchAnalytics.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                analiticasActivadas();
+            } else {
+                Toast.makeText(this, "Analiticas desactivadas", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    private void analiticasActivadas() {
+        Bundle params = new Bundle();
+        params.putString(FirebaseAnalytics.Param.METHOD, "inicio de app");
+        params.putString("todoist", "Angel Vasquez");
+        params.putString(FirebaseAnalytics.Event.TUTORIAL_BEGIN, "inicio de app");
+        analytics.logEvent("inicio_app", params);
+
+        Toast.makeText(this, "Analiticas activadas", Toast.LENGTH_SHORT).show();
 
     }
     public void agregarDatos(){
+
+
+        if (switchAnalytics.isChecked()) {
+            Bundle UrgenciaBaja = new Bundle();
+            UrgenciaBaja.putString("Tarea_Guardada", "clic Guardar");
+            UrgenciaBaja.putString("Urgencia", "Guardar tarea local");
+            UrgenciaBaja.putString("Se_Guardo_local_mente", "Guardar");
+
+            analytics.logEvent("clic_urgencia_baja", UrgenciaBaja);
+        }
+
         String titulo = editTextTitulo.getText().toString();
         String descripcion = editTextDescripcion.getText().toString();
         int idUrgencia = tipoUrgencia.getCheckedRadioButtonId();
+
+
 
         String tipoUrgencia = "";
 
         if(idUrgencia == R.id.bajo){
             tipoUrgencia = "BAJO";
+
+
         }else if(idUrgencia == R.id.medio){
             tipoUrgencia = "MEDIO";
         }else if(idUrgencia == R.id.alto){
@@ -131,13 +199,21 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
-
     public void nuevaVentana(View view){
         Intent intent = new Intent(this, listaTodoist.class);
         startActivity(intent);
     }
-
     public void consultarTareas(){
+
+        if (switchAnalytics.isChecked()) {
+            // Registra evento de Firebase si las analíticas están activadas
+            Bundle tareaCreada = new Bundle();
+            tareaCreada.putString("TodoIst_api", "Creo Tarea en todoIst");
+            tareaCreada.putString("Status", "Tarea creada");
+            tareaCreada.putString("Codigo", "200");
+
+            analytics.logEvent("Llamada_al_api", tareaCreada);
+        }
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.todoist.com/api/v1/")
@@ -154,6 +230,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
                 if (response.isSuccessful()){
                     Log.d("TIPO DE RESPUESTA" , "Tareas" +response.code());
+
                 }else{
                     Log.e("TIPO DE RESPUESTA", "Error en la respuesta: " + response.code());
                 }
