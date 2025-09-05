@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "751349774020",
+    "project_id": "todoappcalendar",
+    "storage_bucket": "todoappcalendar.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:751349774020:android:1716b696e52aa7b5157b91",
+        "android_client_info": {
+          "package_name": "com.example.todoappgooglecalendar"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoWToJ9sN3SN4dYt-I-cIrdDCNDe3KPR4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
